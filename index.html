@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Ti 💖</title>
+
+<!-- Fuentes bonitas -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cinzel:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #ff9ecf, #ff6fb5);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+/* CONTENEDOR REGALO */
+#regalo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+    animation: flotar 3s ease-in-out infinite;
+    position: relative;
+}
+
+.caja {
+    font-size: 170px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* HOVER */
+#regalo:hover .caja {
+    transform: scale(1.2) rotate(8deg);
+    filter: drop-shadow(0 0 20px pink);
+}
+
+.texto-regalo {
+    margin-top: 10px;
+    font-size: 36px;
+    color: white;
+    text-shadow: 0 0 15px pink;
+    letter-spacing: 3px;
+    font-family: 'Pacifico', cursive;
+    transition: transform 0.3s ease;
+}
+
+#regalo:hover .texto-regalo {
+    transform: scale(1.15);
+}
+
+/* MENSAJE OCULTO */
+#mensaje {
+    position: absolute;
+    font-size: 48px;
+    color: white;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+    text-shadow: 0 0 20px pink;
+    font-family: 'Cinzel', serif;
+}
+
+/* ANIMACION FLOTAR */
+@keyframes flotar {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+/* ELEMENTOS QUE CAEN */
+.caida {
+    position: absolute;
+    top: -50px;
+    font-size: 25px;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="regalo" onclick="abrir()">
+    <div class="caja">🎁</div>
+    <div class="texto-regalo">Ábreme</div>
+</div>
+
+<div id="mensaje">
+    Siempre serás mi persona favorita 💖
+</div>
+
+<script>
+function abrir() {
+    document.getElementById("regalo").style.display = "none";
+    document.getElementById("mensaje").style.opacity = "1";
+}
+
+/* ELEMENTOS QUE CAEN */
+const elementos = ["💖", "🌸", "🤍", "🌺", "💗"];
+
+function crearElemento() {
+    const el = document.createElement("div");
+    el.classList.add("caida");
+    el.innerHTML = elementos[Math.floor(Math.random() * elementos.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    el.style.fontSize = (Math.random() * 20 + 20) + "px";
+    document.body.appendChild(el);
+
+    setTimeout(() => {
+        el.remove();
+    }, 7000);
+}
+
+setInterval(crearElemento, 300);
+</script>
+
+</body>
+</html>
